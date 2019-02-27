@@ -34,4 +34,4 @@ while True:
                     index += 1
             if not tweeted: # out of tweets
                 exit()
-    sleep(60)
+    time.sleep(60)
