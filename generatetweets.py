@@ -28,7 +28,6 @@ def gen(howmany):
             choices = res[1].split('|')
             grammar[res[0]] = choices 
 
-    howmany = 10
     for i in range(howmany):
         result.append(re.sub(r'\s+', ' ', generate(grammar, '<s>')))
     return result
