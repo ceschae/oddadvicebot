@@ -1,5 +1,6 @@
 from twython import Twython
 from random import shuffle
+from generatetweets import gen
 import json
 import time
 
@@ -13,6 +14,19 @@ ACCESS_TOKEN_SECRET = d[0]['ACCESS_TOKEN_SECRET']
 
 twitter_client = Twython(API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
+# refresh the tweets
+
+with open('tweets.json', 'r+') as f:
+    tweets = json.load(f)
+    howmany = 10
+    newtweets = gen(howmany)
+    for t in newtweets:
+        tweets.append({'tweet': t})
+    f.seek(0)
+    json.dump(tweets, f, indent=4)
+    f.truncate()
+
+# tweet the tweets
 while True:
     t = time.localtime(time.time())
     if t.tm_min % 15 == 0:

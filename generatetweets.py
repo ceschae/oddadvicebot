@@ -16,16 +16,19 @@ def generate(grammar, nt):
             sentence += ' ' + word
     return sentence[1:]
 
-grammar = {}
+def gen(howmany):
+    result = []
+    grammar = {}
 
-with open('advice.txt') as f:
-    lines = f.readlines()
-    for line in lines:
-        line = line.replace('\n', '')
-        res = line.split('::=')
-        choices = res[1].split('|')
-        grammar[res[0]] = choices 
+    with open('advice.txt') as f:
+        lines = f.readlines()
+        for line in lines:
+            line = line.replace('\n', '')
+            res = line.split('::=')
+            choices = res[1].split('|')
+            grammar[res[0]] = choices 
 
-howmany = 10
-for i in range(howmany):
-    print(re.sub(r'\s+', ' ', generate(grammar, '<s>')))
+    howmany = 10
+    for i in range(howmany):
+        result.append(re.sub(r'\s+', ' ', generate(grammar, '<s>')))
+    return result
